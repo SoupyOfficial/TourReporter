@@ -7,15 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E5248CB3A60F20074FB37464 /* Pods_TipReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC48682E644456FC331A778 /* Pods_TipReporter.framework */; };
 		EB6DCE3229F0BB100098AA11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE3129F0BB100098AA11 /* AppDelegate.swift */; };
 		EB6DCE3429F0BB100098AA11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE3329F0BB100098AA11 /* SceneDelegate.swift */; };
 		EB6DCE3629F0BB100098AA11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE3529F0BB100098AA11 /* ViewController.swift */; };
 		EB6DCE3929F0BB100098AA11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE3729F0BB100098AA11 /* Main.storyboard */; };
 		EB6DCE3B29F0BB120098AA11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE3A29F0BB120098AA11 /* Assets.xcassets */; };
 		EB6DCE3E29F0BB120098AA11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE3C29F0BB120098AA11 /* LaunchScreen.storyboard */; };
+		EB6DCE4A29F0BF4F0098AA11 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE4929F0BF4F0098AA11 /* TabBarViewController.swift */; };
+		EB6DCE4E29F0C4BF0098AA11 /* AddTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE4D29F0C4BF0098AA11 /* AddTipsViewController.swift */; };
+		EB6DCE5229F0DF3F0098AA11 /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5129F0DF3F0098AA11 /* FamilyTableViewCell.swift */; };
+		EB6DCE5429F18AAC0098AA11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */; };
+		EB6DCE5629F195730098AA11 /* ViewTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */; };
+		EB6DCE5829F1977F0098AA11 /* ViewTipsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6BC48682E644456FC331A778 /* Pods_TipReporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TipReporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7AB8A2F75CD7CB2C551B2B6 /* Pods-TipReporter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipReporter.debug.xcconfig"; path = "Target Support Files/Pods-TipReporter/Pods-TipReporter.debug.xcconfig"; sourceTree = "<group>"; };
 		EB6DCE2E29F0BB100098AA11 /* TipReporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipReporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6DCE3129F0BB100098AA11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB6DCE3329F0BB100098AA11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +33,13 @@
 		EB6DCE3A29F0BB120098AA11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB6DCE3D29F0BB120098AA11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB6DCE3F29F0BB120098AA11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB6DCE4929F0BF4F0098AA11 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		EB6DCE4D29F0C4BF0098AA11 /* AddTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTipsViewController.swift; sourceTree = "<group>"; };
+		EB6DCE5129F0DF3F0098AA11 /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
+		EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTipsViewController.swift; sourceTree = "<group>"; };
+		EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTipsTableViewCell.swift; sourceTree = "<group>"; };
+		FFA1670B938292A0CEBD65E2 /* Pods-TipReporter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipReporter.release.xcconfig"; path = "Target Support Files/Pods-TipReporter/Pods-TipReporter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +47,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5248CB3A60F20074FB37464 /* Pods_TipReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD3BB64A483ED48AAF9FEF80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7AB8A2F75CD7CB2C551B2B6 /* Pods-TipReporter.debug.xcconfig */,
+				FFA1670B938292A0CEBD65E2 /* Pods-TipReporter.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C958317DBBD5235101C1CBCC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BC48682E644456FC331A778 /* Pods_TipReporter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EB6DCE2529F0BB0F0098AA11 = {
 			isa = PBXGroup;
 			children = (
 				EB6DCE3029F0BB100098AA11 /* TipReporter */,
 				EB6DCE2F29F0BB100098AA11 /* Products */,
+				BD3BB64A483ED48AAF9FEF80 /* Pods */,
+				C958317DBBD5235101C1CBCC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +92,37 @@
 		EB6DCE3029F0BB100098AA11 /* TipReporter */ = {
 			isa = PBXGroup;
 			children = (
+				EB6DCE4729F0BBA80098AA11 /* Styles */,
+				EB6DCE4629F0BB840098AA11 /* Views */,
 				EB6DCE3129F0BB100098AA11 /* AppDelegate.swift */,
 				EB6DCE3329F0BB100098AA11 /* SceneDelegate.swift */,
-				EB6DCE3529F0BB100098AA11 /* ViewController.swift */,
 				EB6DCE3729F0BB100098AA11 /* Main.storyboard */,
 				EB6DCE3A29F0BB120098AA11 /* Assets.xcassets */,
 				EB6DCE3C29F0BB120098AA11 /* LaunchScreen.storyboard */,
 				EB6DCE3F29F0BB120098AA11 /* Info.plist */,
+				EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */,
 			);
 			path = TipReporter;
+			sourceTree = "<group>";
+		};
+		EB6DCE4629F0BB840098AA11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB6DCE3529F0BB100098AA11 /* ViewController.swift */,
+				EB6DCE4929F0BF4F0098AA11 /* TabBarViewController.swift */,
+				EB6DCE4D29F0C4BF0098AA11 /* AddTipsViewController.swift */,
+				EB6DCE5129F0DF3F0098AA11 /* FamilyTableViewCell.swift */,
+				EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */,
+				EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EB6DCE4729F0BBA80098AA11 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB6DCE4229F0BB120098AA11 /* Build configuration list for PBXNativeTarget "TipReporter" */;
 			buildPhases = (
+				DACA3D1B8EB497EF0BD63171 /* [CP] Check Pods Manifest.lock */,
 				EB6DCE2A29F0BB100098AA11 /* Sources */,
 				EB6DCE2B29F0BB100098AA11 /* Frameworks */,
 				EB6DCE2C29F0BB100098AA11 /* Resources */,
+				0115975B5F39EE1DB451B422 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6DCE3E29F0BB120098AA11 /* LaunchScreen.storyboard in Resources */,
+				EB6DCE5429F18AAC0098AA11 /* GoogleService-Info.plist in Resources */,
 				EB6DCE3B29F0BB120098AA11 /* Assets.xcassets in Resources */,
 				EB6DCE3929F0BB100098AA11 /* Main.storyboard in Resources */,
 			);
@@ -133,11 +194,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0115975B5F39EE1DB451B422 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TipReporter/Pods-TipReporter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TipReporter/Pods-TipReporter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TipReporter/Pods-TipReporter-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DACA3D1B8EB497EF0BD63171 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TipReporter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EB6DCE2A29F0BB100098AA11 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6DCE5629F195730098AA11 /* ViewTipsViewController.swift in Sources */,
+				EB6DCE4E29F0C4BF0098AA11 /* AddTipsViewController.swift in Sources */,
+				EB6DCE5229F0DF3F0098AA11 /* FamilyTableViewCell.swift in Sources */,
+				EB6DCE4A29F0BF4F0098AA11 /* TabBarViewController.swift in Sources */,
+				EB6DCE5829F1977F0098AA11 /* ViewTipsTableViewCell.swift in Sources */,
 				EB6DCE3629F0BB100098AA11 /* ViewController.swift in Sources */,
 				EB6DCE3229F0BB100098AA11 /* AppDelegate.swift in Sources */,
 				EB6DCE3429F0BB100098AA11 /* SceneDelegate.swift in Sources */,
@@ -282,6 +390,7 @@
 		};
 		EB6DCE4329F0BB120098AA11 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7AB8A2F75CD7CB2C551B2B6 /* Pods-TipReporter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -290,11 +399,13 @@
 				DEVELOPMENT_TEAM = DGQ5P34GS9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TipReporter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Tip Tracker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,6 +421,7 @@
 		};
 		EB6DCE4429F0BB120098AA11 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFA1670B938292A0CEBD65E2 /* Pods-TipReporter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -318,11 +430,13 @@
 				DEVELOPMENT_TEAM = DGQ5P34GS9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TipReporter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Tip Tracker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
