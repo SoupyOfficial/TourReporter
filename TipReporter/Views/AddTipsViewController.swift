@@ -9,18 +9,24 @@ import UIKit
 import FirebaseFirestore
 
 
-class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTableViewControllerDelegate {
+class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
     
     @IBOutlet weak var tourTypesButton: UIButton!
     @IBOutlet weak var tourTypesMenu: UIMenu!
-
+    @IBOutlet weak var resultsMessage: UILabel!
+    
     // input fields
-    @IBOutlet weak var tourNotesField: UITextView!
     @IBOutlet weak var tourDateTime: UIDatePicker!
+    @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var reportedTipLabel: UILabel!
     @IBOutlet weak var reportedTipField: UITextField!
+    @IBOutlet weak var actualTipLabel: UILabel!
     @IBOutlet weak var actualTipField: UITextField!
     @IBOutlet weak var easinessSegment: UISegmentedControl!
     @IBOutlet weak var nicenessSegment: UISegmentedControl!
@@ -28,13 +34,95 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
     @IBOutlet weak var followDirectionsSegment: UISegmentedControl!
     @IBOutlet weak var weirdRequestsSegment: UISegmentedControl!
     @IBOutlet weak var tourFocusSegment: UISegmentedControl!
-    
-    
+    @IBOutlet weak var tourNotesField: UITextView!
+
+    var allSegments: [UISegmentedControl] = []
+    var originalViewFrame: CGRect?
+    var activeTextField: UITextField?
+
     
     
     var families: [[String: Any]] = []
     let db = Firestore.firestore()
 
+    @IBAction func addFamillyButtonPress(_ sender: Any) {
+        // validate required fields
+        var requiredFields: [UITextField] = [firstNameField, lastNameField, reportedTipField, actualTipField]
+        var emptyFields: [UITextField] = []
+        
+        for field in requiredFields {
+            if field.text?.isEmpty ?? true {
+                field.layer.borderWidth = 1.0
+                field.layer.borderColor = UIColor.red.cgColor
+                emptyFields.append(field)
+            } else {
+                field.layer.borderWidth = 0.0
+            }
+        }
+
+        if emptyFields.count > 0 {
+            // at least one field is empty, display an error message
+            // you can display a message above the empty fields
+            // or create a UIAlertController to show an alert
+            resultsMessage.isHidden = false
+            resultsMessage.textColor = .red
+            resultsMessage.text = "Please fill in all required fields"
+            print("Please fill in all required fields")
+        } else {
+            let data: [String: Any] = ["First Name": firstNameField.text!,
+                                       "Last Name": lastNameField.text!,
+                                       "Reported Tip": reportedTipField.text!,
+                                       "Actual Tip": actualTipField.text!,
+                                       "Date": tourDateTime.date,
+                                       "Tour Type": selectedTypeIndex,
+                                       "Easiness": easinessSegment.selectedSegmentIndex,
+                                       "Niceness": nicenessSegment.selectedSegmentIndex,
+                                       "Demandingness": demandingSegment.selectedSegmentIndex,
+                                       "Follow Directions": followDirectionsSegment.selectedSegmentIndex,
+                                       "Weird Requests": weirdRequestsSegment.selectedSegmentIndex,
+                                       "Main Focus": tourFocusSegment.selectedSegmentIndex,
+                                       "Interests": selectedInterests,
+                                       "Non-Interests": selectedNoninterests,
+                                       "Tour Notes": tourNotesField.text ?? ""]
+            
+            // Add a new document with data
+            db.collection("Test").addDocument(data: data) { [self] err in
+                if let err = err {
+                    resultsMessage.isHidden = false
+                    resultsMessage.textColor = .red
+                    resultsMessage.text = "Error adding family"
+                    print("Error adding document: \(err)")
+                } else {
+                    resultsMessage.isHidden = false
+                    resultsMessage.textColor = .green
+                    resultsMessage.text = "Family added"
+                    print("Document added successfully")
+                }
+            }
+            
+            // reset fields
+            defaultFields()
+
+        }
+    }
+    
+    func defaultFields() {
+        firstNameField.text = ""
+        lastNameField.text = ""
+        reportedTipField.text = ""
+        actualTipField.text = ""
+        tourDateTime.date = Date()
+        selectedTypeIndex = 0
+        easinessSegment.selectedSegmentIndex = 2
+        nicenessSegment.selectedSegmentIndex = 2
+        demandingSegment.selectedSegmentIndex = 2
+        followDirectionsSegment.selectedSegmentIndex = 2
+        weirdRequestsSegment.selectedSegmentIndex = 2
+        tourFocusSegment.selectedSegmentIndex = 2
+        selectedInterests = []
+        selectedNoninterests = []
+        tourNotesField.text = ""
+    }
     
     @IBAction func interestsButton(_ sender: Any) {
         let interestsTableViewController = storyboard?.instantiateViewController(withIdentifier: "InterestsTableViewController") as! InterestsTableViewController
@@ -62,29 +150,31 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
     var interests: [String] = []
 
     var selectedInterests = [String]()
-
     var selectedNoninterests = [String]()
-
-    // Declare the currency formatter property
-    let currencyFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.currencySymbol = "$"
-        formatter.currencyCode = "USD"
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }()
-    
-    // Declare the float formatter property
-    let floatFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "en_US")
-        return formatter
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        
+        // Set the delegate of each text field to self
+        firstNameField.delegate = self
+        lastNameField.delegate = self
+        reportedTipField.delegate = self
+        actualTipField.delegate = self
+        tourNotesField.delegate = self
+        
+        tapGesture.addTarget(self, action: #selector(viewTapped))
+        view.addGestureRecognizer(tapGesture)
+        
+            
+        resultsMessage.isHidden = true
+        defaultFields()
+        
+        allSegments = [easinessSegment, nicenessSegment, demandingSegment, tourFocusSegment, weirdRequestsSegment, followDirectionsSegment]
+        allSegments.forEach { $0.selectedSegmentIndex = 2 }
         
         if let interestsFileURL = Bundle.main.url(forResource: "Interests", withExtension: "txt") {
             if let interestsFile = try? String(contentsOf: interestsFileURL) {
@@ -124,6 +214,27 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
         
     }
     
+    // This method is called when the return button on the keyboard is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case firstNameField:
+            lastNameField.becomeFirstResponder()
+        case lastNameField:
+            reportedTipField.becomeFirstResponder()
+        case reportedTipField:
+            actualTipField.becomeFirstResponder()
+        case actualTipField:
+            actualTipField.resignFirstResponder()
+        case tourNotesField:
+            view.endEditing(true)
+            tourNotesField.resignFirstResponder()
+        default:
+            break
+        }
+        return true
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         //print(selectedInterests)
     }
@@ -141,7 +252,8 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard var text = textField.text else { return }
-
+        textField.becomeFirstResponder()
+        
         // Replace any non-digit characters with an empty string
         text = text.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
 
@@ -179,6 +291,58 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
             interestsTableViewController.delegate = self
         }
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
+            
+            var rect = self.view.frame
+            rect.size.height -= keyboardHeight
+            if let activeField = activeTextField, !rect.contains(activeField.frame.origin) {
+                scrollView.scrollRectToVisible(activeField.frame, animated: true)
+            }
+        }
+    }
 
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            let contentInsets = UIEdgeInsets.zero
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
+            
+            var rect = self.view.frame
+            self.view.frame = rect
+        }
+    }
+
+    @objc func tourNotesTapped() {
+        tourNotesField.becomeFirstResponder()
+    }
+    
+    // Declare the currency formatter property
+    let currencyFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.currencySymbol = "$"
+        formatter.currencyCode = "USD"
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+    
+    // Declare the float formatter property
+    let floatFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter
+    }()
+    
+    @objc private func viewTapped() {
+        view.endEditing(true)
+    }
     
 }
