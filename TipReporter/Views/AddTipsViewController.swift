@@ -9,23 +9,61 @@ import UIKit
 import FirebaseFirestore
 
 
-class AddTipsViewController: UIViewController {
+class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTableViewControllerDelegate {
     
     
     @IBOutlet weak var tourTypesButton: UIButton!
     @IBOutlet weak var tourTypesMenu: UIMenu!
 
-    @IBOutlet weak var addFamilyButton: UIButton!
-    
+    // input fields
+    @IBOutlet weak var tourNotesField: UITextView!
     @IBOutlet weak var tourDateTime: UIDatePicker!
+    @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var reportedTipField: UITextField!
+    @IBOutlet weak var actualTipField: UITextField!
+    @IBOutlet weak var easinessSegment: UISegmentedControl!
+    @IBOutlet weak var nicenessSegment: UISegmentedControl!
+    @IBOutlet weak var demandingSegment: UISegmentedControl!
+    @IBOutlet weak var followDirectionsSegment: UISegmentedControl!
+    @IBOutlet weak var weirdRequestsSegment: UISegmentedControl!
+    @IBOutlet weak var tourFocusSegment: UISegmentedControl!
+    
+    
+    
     
     var families: [[String: Any]] = []
     let db = Firestore.firestore()
 
     
+    @IBAction func interestsButton(_ sender: Any) {
+        let interestsTableViewController = storyboard?.instantiateViewController(withIdentifier: "InterestsTableViewController") as! InterestsTableViewController
+           interestsTableViewController.delegate = self
+           interestsTableViewController.interestBool = true
+           interestsTableViewController.selectedInterests = selectedInterests // Set the initial selection
+           interestsTableViewController.selectedRows = selectedInterests.compactMap { interests.firstIndex(of: $0) } // Set the selected rows based on the initial selection
+           present(interestsTableViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func noninterestsButton(_ sender: Any) {
+        let interestsTableViewController = storyboard?.instantiateViewController(withIdentifier: "InterestsTableViewController") as! InterestsTableViewController
+           interestsTableViewController.delegate = self
+           interestsTableViewController.interestBool = false
+           interestsTableViewController.selectedInterests = selectedNoninterests // Set the initial selection
+           interestsTableViewController.selectedRows = selectedNoninterests.compactMap { interests.firstIndex(of: $0) } // Set the selected rows based on the initial selection
+           present(interestsTableViewController, animated: true, completion: nil)
+    }
     
     var types = ["Private", "Non-Private", "Educational", "Complementary", "RIP"]
     var selectedTypeIndex = 0 // default to first type
+    
+    var interestFileContents = try? String(contentsOfFile: "TipReporter/Interests.txt", encoding: .utf8)
+
+    var interests: [String] = []
+
+    var selectedInterests = [String]()
+
+    var selectedNoninterests = [String]()
 
     // Declare the currency formatter property
     let currencyFormatter: NumberFormatter = {
@@ -47,23 +85,49 @@ class AddTipsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        // create the menu
-                let menu = UIMenu(title: "Tour Types", children: types.enumerated().map { (index, type) in
-                    UIAction(title: type, handler: { [weak self] _ in
-                        self?.selectedTypeIndex = index
-                        self?.tourTypesButton.setTitle(type, for: .normal)
-                    })
-                })
-                
-                // assign the menu to the button
-                tourTypesButton.menu = menu
-                tourTypesButton.showsMenuAsPrimaryAction = true
-                tourTypesButton.setTitle(types[selectedTypeIndex], for: .normal)
+        if let interestsFileURL = Bundle.main.url(forResource: "Interests", withExtension: "txt") {
+            if let interestsFile = try? String(contentsOf: interestsFileURL) {
+                interests = interestsFile.components(separatedBy: "\n")
             }
+        }
+        
+        // create the tour types menu
+        let tourTypesMenu = UIMenu(title: "Tour Types", children: types.enumerated().map { (index, type) in
+            UIAction(title: type, handler: { [weak self] _ in
+                self?.selectedTypeIndex = index
+                self?.tourTypesButton.setTitle(type, for: .normal)
+            })
+        })
+        
+        // assign the menu to the button
+        tourTypesButton.menu = tourTypesMenu
+        tourTypesButton.showsMenuAsPrimaryAction = true
+        tourTypesButton.setTitle(types[selectedTypeIndex], for: .normal)
+        
+        
+        // remove dumb forced extra line
+        interests.removeLast()
+        // create the interests menu
+//        let interestsMenu = UIMenu(title: "Interests", children: interests.enumerated().map { (index, type) in
+//            UIAction(title: type, handler: { [weak self] _ in
+//                self?.selectedInterestIndex = index
+//                self?.interestsButton.setTitle(type, for: .normal)
+//            })
+//        })
+        
+        // assign the menu to the button
+//        interestsButton.menu = interestsMenu
+//        interestsButton.showsMenuAsPrimaryAction = true
+//        interestsButton.setTitle(interests[selectedInterestIndex], for: .normal)
+//
+        
+    }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        //print(selectedInterests)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -74,70 +138,6 @@ class AddTipsViewController: UIViewController {
     }
     */
     
-        @IBAction func addFamilyButtonPressed(_ sender: Any) {
-            let alert = UIAlertController(title: "Add Tip", message: "Enter a name and tip for this tour type", preferredStyle: .alert)
-            
-            alert.addTextField { (textField) in
-                textField.autocapitalizationType
-                textField.placeholder = "First Name"
-            }
-            
-            alert.addTextField { (textField) in
-                textField.autocapitalizationType
-                textField.placeholder = "Last Name"
-            }
-            
-            alert.addTextField { (textField) in
-                textField.placeholder = "Reported Tip"
-                textField.keyboardType = .numberPad
-                
-                // Apply the currency formatter to the user input
-                textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-
-            }
-            
-            alert.addTextField { (textField) in
-                textField.placeholder = "Actual Tip"
-                textField.keyboardType = .numberPad
-                
-                // Apply the currency formatter to the user input
-                textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] (action) in
-                guard let firstName = alert.textFields?[0].text,
-                      let lastName = alert.textFields?[1].text,
-                      let reportedTip = alert.textFields?[2].text?.replacingOccurrences(of: "$", with: ""),
-                      let actualTip = alert.textFields?[3].text?.replacingOccurrences(of: "$", with: ""),
-                      !actualTip.isEmpty else { return }
-                
-                let data: [String: Any] = ["First Name": firstName,
-                                           "Last Name": lastName,
-                                           "Reported Tip": self?.floatFormatter.number(from: reportedTip) ?? 0,
-                                           "Actual Tip": self?.floatFormatter.number(from: actualTip) ?? 0,
-                                           "Date": self?.tourDateTime.date,
-                                           "Tour Type": self?.selectedTypeIndex]
-
-                // Add a new document with data
-                self?.db.collection("Ashley").addDocument(data: data) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        print("Document added successfully")
-                    }
-                }
-                
-                print(self!.families)
-            }
-
-            
-            alert.addAction(cancelAction)
-            alert.addAction(addAction)
-            
-            present(alert, animated: true, completion: nil)
-        }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard var text = textField.text else { return }
@@ -162,5 +162,23 @@ class AddTipsViewController: UIViewController {
         currencyFormatter.minimumFractionDigits = decimalValue < 1 ? 2 : 0 // add dollar sign if value is less than 1
         textField.text = currencyFormatter.string(from: NSNumber(value: decimalValue))
     }
+    
+    func interestsTableViewController(_ controller: InterestsTableViewController, didSelectInterests interests: [String], interestsBool: Bool) {
+        // Do something with the selected interests here
+        print(interestsBool)
+        if(interestsBool) {
+            selectedInterests = interests
+        } else {
+            selectedNoninterests = interests
+        }
+        print("Selected interests: \(interests)")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let interestsTableViewController = segue.destination as? InterestsTableViewController {
+            interestsTableViewController.delegate = self
+        }
+    }
 
+    
 }

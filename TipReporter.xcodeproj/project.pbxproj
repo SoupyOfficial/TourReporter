@@ -20,6 +20,9 @@
 		EB6DCE5429F18AAC0098AA11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */; };
 		EB6DCE5629F195730098AA11 /* ViewTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */; };
 		EB6DCE5829F1977F0098AA11 /* ViewTipsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */; };
+		EB6DCE5B29F886880098AA11 /* Interests.txt in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE5A29F886880098AA11 /* Interests.txt */; };
+		EB6DCE5D29F8A06E0098AA11 /* InterestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5C29F8A06E0098AA11 /* InterestsTableViewController.swift */; };
+		EB6DCE5F29F8A19A0098AA11 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5E29F8A19A0098AA11 /* InterestTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTipsViewController.swift; sourceTree = "<group>"; };
 		EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTipsTableViewCell.swift; sourceTree = "<group>"; };
+		EB6DCE5A29F886880098AA11 /* Interests.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = Interests.txt; path = TipReporter/Interests.txt; sourceTree = SOURCE_ROOT; };
+		EB6DCE5C29F8A06E0098AA11 /* InterestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsTableViewController.swift; sourceTree = "<group>"; };
+		EB6DCE5E29F8A19A0098AA11 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
 		FFA1670B938292A0CEBD65E2 /* Pods-TipReporter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipReporter.release.xcconfig"; path = "Target Support Files/Pods-TipReporter/Pods-TipReporter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +98,7 @@
 		EB6DCE3029F0BB100098AA11 /* TipReporter */ = {
 			isa = PBXGroup;
 			children = (
+				EB6DCE5929F882F40098AA11 /* Structs */,
 				EB6DCE4729F0BBA80098AA11 /* Styles */,
 				EB6DCE4629F0BB840098AA11 /* Views */,
 				EB6DCE3129F0BB100098AA11 /* AppDelegate.swift */,
@@ -101,6 +108,7 @@
 				EB6DCE3C29F0BB120098AA11 /* LaunchScreen.storyboard */,
 				EB6DCE3F29F0BB120098AA11 /* Info.plist */,
 				EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */,
+				EB6DCE5A29F886880098AA11 /* Interests.txt */,
 			);
 			path = TipReporter;
 			sourceTree = "<group>";
@@ -114,6 +122,8 @@
 				EB6DCE5129F0DF3F0098AA11 /* FamilyTableViewCell.swift */,
 				EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */,
 				EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */,
+				EB6DCE5C29F8A06E0098AA11 /* InterestsTableViewController.swift */,
+				EB6DCE5E29F8A19A0098AA11 /* InterestTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -123,6 +133,13 @@
 			children = (
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		EB6DCE5929F882F40098AA11 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Structs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +205,7 @@
 				EB6DCE3E29F0BB120098AA11 /* LaunchScreen.storyboard in Resources */,
 				EB6DCE5429F18AAC0098AA11 /* GoogleService-Info.plist in Resources */,
 				EB6DCE3B29F0BB120098AA11 /* Assets.xcassets in Resources */,
+				EB6DCE5B29F886880098AA11 /* Interests.txt in Resources */,
 				EB6DCE3929F0BB100098AA11 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,9 +260,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6DCE5629F195730098AA11 /* ViewTipsViewController.swift in Sources */,
+				EB6DCE5F29F8A19A0098AA11 /* InterestTableViewCell.swift in Sources */,
 				EB6DCE4E29F0C4BF0098AA11 /* AddTipsViewController.swift in Sources */,
 				EB6DCE5229F0DF3F0098AA11 /* FamilyTableViewCell.swift in Sources */,
 				EB6DCE4A29F0BF4F0098AA11 /* TabBarViewController.swift in Sources */,
+				EB6DCE5D29F8A06E0098AA11 /* InterestsTableViewController.swift in Sources */,
 				EB6DCE5829F1977F0098AA11 /* ViewTipsTableViewCell.swift in Sources */,
 				EB6DCE3629F0BB100098AA11 /* ViewController.swift in Sources */,
 				EB6DCE3229F0BB100098AA11 /* AppDelegate.swift in Sources */,
