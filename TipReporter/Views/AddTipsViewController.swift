@@ -74,13 +74,13 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
                                        "Reported Tip": reportedTipField.text!,
                                        "Actual Tip": actualTipField.text!,
                                        "Date": tourDateTime.date,
-                                       "Tour Type": selectedTypeIndex,
-                                       "Easiness": easinessSegment.selectedSegmentIndex,
-                                       "Niceness": nicenessSegment.selectedSegmentIndex,
-                                       "Demandingness": demandingSegment.selectedSegmentIndex,
-                                       "Follow Directions": followDirectionsSegment.selectedSegmentIndex,
-                                       "Weird Requests": weirdRequestsSegment.selectedSegmentIndex,
-                                       "Main Focus": tourFocusSegment.selectedSegmentIndex,
+                                       "Tour Type": types[selectedTypeIndex],
+                                       "Easiness": easinessSegment.titleForSegment(at: easinessSegment.selectedSegmentIndex)!,
+                                       "Niceness": nicenessSegment.titleForSegment(at: nicenessSegment.selectedSegmentIndex)!,
+                                       "Demandingness": demandingSegment.titleForSegment(at: demandingSegment.selectedSegmentIndex)!,
+                                       "Follow Directions": followDirectionsSegment.titleForSegment(at: followDirectionsSegment.selectedSegmentIndex)!,
+                                       "Weird Requests": weirdRequestsSegment.titleForSegment(at: weirdRequestsSegment.selectedSegmentIndex)!,
+                                       "Main Focus": tourFocusSegment.titleForSegment(at: tourFocusSegment.selectedSegmentIndex)!,
                                        "Interests": selectedInterests,
                                        "Non-Interests": selectedNoninterests,
                                        "Tour Notes": tourNotesField.text ?? ""]
@@ -97,20 +97,20 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
                     resultsMessage.textColor = .green
                     resultsMessage.text = "Family added"
                     print("Document added successfully")
+                    
+                    // reset fields
+                    defaultFields()
                 }
             }
-            
-            // reset fields
-            defaultFields()
-
         }
+        scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     func defaultFields() {
         firstNameField.text = ""
         lastNameField.text = ""
-        reportedTipField.text = ""
-        actualTipField.text = ""
+        actualTipField.text = "$0.00"
+        reportedTipField.text = "$0.00"
         tourDateTime.date = Date()
         selectedTypeIndex = 0
         easinessSegment.selectedSegmentIndex = 2
@@ -198,6 +198,14 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
         
         // remove dumb forced extra line
         interests.removeLast()
+        
+        // Apply the currency formatter
+        actualTipField.text = "$0.00"
+        reportedTipField.text = "$0.00"
+        reportedTipField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        actualTipField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+
+        
         // create the interests menu
 //        let interestsMenu = UIMenu(title: "Interests", children: interests.enumerated().map { (index, type) in
 //            UIAction(title: type, handler: { [weak self] _ in
@@ -271,9 +279,18 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
         let decimalValue = doubleValue / pow(10, Double(currencyFormatter.maximumFractionDigits))
 
         // Format the decimal value as a currency string
-        currencyFormatter.minimumFractionDigits = decimalValue < 1 ? 2 : 0 // add dollar sign if value is less than 1
-        textField.text = currencyFormatter.string(from: NSNumber(value: decimalValue))
+        currencyFormatter.minimumFractionDigits = 2
+        var formattedString = currencyFormatter.string(from: NSNumber(value: decimalValue)) ?? ""
+        
+        // Append extra zeros if necessary
+        let decimalCount = formattedString.components(separatedBy: ".").last?.count ?? 0
+        if decimalCount < currencyFormatter.minimumFractionDigits {
+            formattedString += String(repeating: "0", count: currencyFormatter.minimumFractionDigits - decimalCount)
+        }
+        
+        textField.text = formattedString
     }
+
     
     func interestsTableViewController(_ controller: InterestsTableViewController, didSelectInterests interests: [String], interestsBool: Bool) {
         // Do something with the selected interests here

@@ -94,18 +94,26 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Configure the cell with the data from the query result
         let result = results[indexPath.row]
-        cell.firstNameLabel.text = result["First Name"] as? String
-        cell.lastNameLabel.text = result["Last Name"] as? String
-        cell.reportedTipLabel.text = "\(result["Reported Tip"] ?? "")"
-        cell.actualTipLabel.text = "\(result["Actual Tip"] ?? "")"
-        let tourTypeIndex = result["Tour Type"] as? Int ?? 0
-        cell.tourTypeLabel.text = cell.types[tourTypeIndex]
+        cell.firstNameLabel.text = result["First Name"] as? String ?? ""
+        cell.lastNameLabel.text = result["Last Name"] as? String ?? ""
+        cell.reportedTipLabel.text = result["Reported Tip"] as? String ?? ""
+        cell.actualTipLabel.text = result["Actual Tip"] as? String ?? ""
+        cell.tourTypeLabel.text = result["Tour Type"] as? String ?? ""
+        cell.easinessLabel.text = result["Easiness"] as? String ?? ""
+        cell.nicenessLabel.text = result["Niceness"] as? String ?? ""
+        cell.demandingLabel.text = result["Demanding"] as? String ?? ""
+        cell.linstenedLabel.text = result["Listened"] as? String ?? ""
+        cell.unorthodoxLabel.text = result["Unorthodox"] as? String ?? ""
+        cell.mainFocusLabel.text = result["Main Focus"] as? String ?? ""
+        cell.interestsLabel.text = result["Interests"] as? String ?? ""
+        cell.nonInterestsLabel.text = result["Non-Interests"] as? String ?? ""
+        cell.tourNotesLabel.text = result["Tour Notes"] as? String ?? ""
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 225
+        return 715
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

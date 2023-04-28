@@ -14,28 +14,38 @@ class ViewTipsTableViewCell: UITableViewCell {
     @IBOutlet weak var reportedTipLabel: UILabel!
     @IBOutlet weak var actualTipLabel: UILabel!
     @IBOutlet weak var tourTypeLabel: UILabel!
+    @IBOutlet weak var easinessLabel: UILabel!
+    @IBOutlet weak var nicenessLabel: UILabel!
+    @IBOutlet weak var demandingLabel: UILabel!
+    @IBOutlet weak var linstenedLabel: UILabel!
+    @IBOutlet weak var unorthodoxLabel: UILabel!
+    @IBOutlet weak var mainFocusLabel: UILabel!
+    @IBOutlet weak var interestsLabel: UILabel!
+    @IBOutlet weak var nonInterestsLabel: UILabel!
+    @IBOutlet weak var tourNotesLabel: UILabel!
+    
     
     let formatter = NumberFormatter()
     let types = ["Private", "Non-Private", "Educational", "Complementary", "RIP"]
     
     var tipData: [String: Any]? {
         didSet {
-            guard let tipData = tipData,
-                  let firstName = tipData["First Name"] as? String,
-                  let lastName = tipData["Last Name"] as? String,
-                  let reportedTip = tipData["Reported Tip"] as? NSNumber,
-                  let actualTip = tipData["Actual Tip"] as? NSNumber,
-                  let tourType = tipData["Tour Type"] as? Int
-            else { return }
+            guard let tipData = tipData else { return }
             
-            firstNameLabel.text = firstName
-            lastNameLabel.text = lastName
-            
-            formatter.numberStyle = .currency
-            reportedTipLabel.text = formatter.string(from: reportedTip)
-            actualTipLabel.text = formatter.string(from: actualTip)
-            
-            tourTypeLabel.text = types[tourType]
+            firstNameLabel.text = tipData["First Name"] as? String ?? ""
+            lastNameLabel.text = tipData["Last Name"] as? String ?? ""
+            reportedTipLabel.text = tipData["Reported Tip"] as? String ?? ""
+            actualTipLabel.text = tipData["Actual Tip"] as? String ?? ""
+            tourTypeLabel.text = tipData["Tour Type"] as? String ?? ""
+            easinessLabel.text = tipData["Easiness"] as? String ?? ""
+            nicenessLabel.text = tipData["Niceness"] as? String ?? ""
+            demandingLabel.text = tipData["Demanding"] as? String ?? ""
+            linstenedLabel.text = tipData["Listened"] as? String ?? ""
+            unorthodoxLabel.text = tipData["Unorthodox"] as? String ?? ""
+            mainFocusLabel.text = tipData["Main Focus"] as? String ?? ""
+            interestsLabel.text = tipData["Interests"] as? String ?? ""
+            nonInterestsLabel.text = tipData["Non-Interests"] as? String ?? ""
+            tourNotesLabel.text = tipData["Tour Notes"] as? String ?? ""
         }
     }
     
