@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		E5248CB3A60F20074FB37464 /* Pods_TipReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC48682E644456FC331A778 /* Pods_TipReporter.framework */; };
+		EB1DEF7529FE004900FB5E43 /* TourSummaryDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1DEF7429FE004900FB5E43 /* TourSummaryDetailsViewCell.swift */; };
+		EB1DEF7729FE015400FB5E43 /* TourSummaryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1DEF7629FE015400FB5E43 /* TourSummaryDetailsViewController.swift */; };
 		EB6DCE3229F0BB100098AA11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE3129F0BB100098AA11 /* AppDelegate.swift */; };
 		EB6DCE3429F0BB100098AA11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE3329F0BB100098AA11 /* SceneDelegate.swift */; };
-		EB6DCE3629F0BB100098AA11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE3529F0BB100098AA11 /* ViewController.swift */; };
 		EB6DCE3929F0BB100098AA11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE3729F0BB100098AA11 /* Main.storyboard */; };
 		EB6DCE3B29F0BB120098AA11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE3A29F0BB120098AA11 /* Assets.xcassets */; };
 		EB6DCE3E29F0BB120098AA11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE3C29F0BB120098AA11 /* LaunchScreen.storyboard */; };
 		EB6DCE4A29F0BF4F0098AA11 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE4929F0BF4F0098AA11 /* TabBarViewController.swift */; };
 		EB6DCE4E29F0C4BF0098AA11 /* AddTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE4D29F0C4BF0098AA11 /* AddTipsViewController.swift */; };
-		EB6DCE5229F0DF3F0098AA11 /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5129F0DF3F0098AA11 /* FamilyTableViewCell.swift */; };
 		EB6DCE5429F18AAC0098AA11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */; };
 		EB6DCE5629F195730098AA11 /* ViewTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */; };
 		EB6DCE5829F1977F0098AA11 /* ViewTipsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */; };
@@ -28,17 +28,17 @@
 /* Begin PBXFileReference section */
 		6BC48682E644456FC331A778 /* Pods_TipReporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TipReporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AB8A2F75CD7CB2C551B2B6 /* Pods-TipReporter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipReporter.debug.xcconfig"; path = "Target Support Files/Pods-TipReporter/Pods-TipReporter.debug.xcconfig"; sourceTree = "<group>"; };
+		EB1DEF7429FE004900FB5E43 /* TourSummaryDetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourSummaryDetailsViewCell.swift; sourceTree = "<group>"; };
+		EB1DEF7629FE015400FB5E43 /* TourSummaryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourSummaryDetailsViewController.swift; sourceTree = "<group>"; };
 		EB6DCE2E29F0BB100098AA11 /* TipReporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipReporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6DCE3129F0BB100098AA11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB6DCE3329F0BB100098AA11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EB6DCE3529F0BB100098AA11 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EB6DCE3829F0BB100098AA11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB6DCE3A29F0BB120098AA11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB6DCE3D29F0BB120098AA11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB6DCE3F29F0BB120098AA11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB6DCE4929F0BF4F0098AA11 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EB6DCE4D29F0C4BF0098AA11 /* AddTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTipsViewController.swift; sourceTree = "<group>"; };
-		EB6DCE5129F0DF3F0098AA11 /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
 		EB6DCE5329F18AAC0098AA11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTipsViewController.swift; sourceTree = "<group>"; };
 		EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTipsTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +98,7 @@
 		EB6DCE3029F0BB100098AA11 /* TipReporter */ = {
 			isa = PBXGroup;
 			children = (
+				EB6DCE6029FC74990098AA11 /* Tests */,
 				EB6DCE5929F882F40098AA11 /* Structs */,
 				EB6DCE4729F0BBA80098AA11 /* Styles */,
 				EB6DCE4629F0BB840098AA11 /* Views */,
@@ -116,14 +117,14 @@
 		EB6DCE4629F0BB840098AA11 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EB6DCE3529F0BB100098AA11 /* ViewController.swift */,
 				EB6DCE4929F0BF4F0098AA11 /* TabBarViewController.swift */,
 				EB6DCE4D29F0C4BF0098AA11 /* AddTipsViewController.swift */,
-				EB6DCE5129F0DF3F0098AA11 /* FamilyTableViewCell.swift */,
 				EB6DCE5529F195730098AA11 /* ViewTipsViewController.swift */,
 				EB6DCE5729F1977F0098AA11 /* ViewTipsTableViewCell.swift */,
 				EB6DCE5C29F8A06E0098AA11 /* InterestsTableViewController.swift */,
 				EB6DCE5E29F8A19A0098AA11 /* InterestTableViewCell.swift */,
+				EB1DEF7429FE004900FB5E43 /* TourSummaryDetailsViewCell.swift */,
+				EB1DEF7629FE015400FB5E43 /* TourSummaryDetailsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -140,6 +141,13 @@
 			children = (
 			);
 			path = Structs;
+			sourceTree = "<group>";
+		};
+		EB6DCE6029FC74990098AA11 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,12 +269,12 @@
 			files = (
 				EB6DCE5629F195730098AA11 /* ViewTipsViewController.swift in Sources */,
 				EB6DCE5F29F8A19A0098AA11 /* InterestTableViewCell.swift in Sources */,
+				EB1DEF7729FE015400FB5E43 /* TourSummaryDetailsViewController.swift in Sources */,
 				EB6DCE4E29F0C4BF0098AA11 /* AddTipsViewController.swift in Sources */,
-				EB6DCE5229F0DF3F0098AA11 /* FamilyTableViewCell.swift in Sources */,
+				EB1DEF7529FE004900FB5E43 /* TourSummaryDetailsViewCell.swift in Sources */,
 				EB6DCE4A29F0BF4F0098AA11 /* TabBarViewController.swift in Sources */,
 				EB6DCE5D29F8A06E0098AA11 /* InterestsTableViewController.swift in Sources */,
 				EB6DCE5829F1977F0098AA11 /* ViewTipsTableViewCell.swift in Sources */,
-				EB6DCE3629F0BB100098AA11 /* ViewController.swift in Sources */,
 				EB6DCE3229F0BB100098AA11 /* AppDelegate.swift in Sources */,
 				EB6DCE3429F0BB100098AA11 /* SceneDelegate.swift in Sources */,
 			);

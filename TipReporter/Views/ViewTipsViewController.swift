@@ -54,6 +54,7 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.results.append(document.data())
                 }
                 self.tableView.reloadData()
+                self.removeDuplicates()
             }
         }
         lastQuery.getDocuments { (querySnapshot, err) in
@@ -61,14 +62,37 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    if !self.results.contains(where: { ($0["documentID"] as? String) == document.documentID }) {
-                        self.results.append(document.data())
-                    }
+                    self.results.append(document.data())
                 }
                 self.tableView.reloadData()
+                //print("\n\nRESULTS PRE-REMOVAL\n\n", self.results)
+                self.removeDuplicates()
+                //print("\n\nRESULTS POST-REMOVAL\n\n", self.results)
+
             }
         }
     }
+
+    func removeDuplicates() {
+        var uniqueData = [[String: Any]]()
+        var duplicateIds = Set<String>()
+        
+        for dict in self.results {
+            if let id = dict["documentID"] as? String {
+                if !duplicateIds.contains(id) {
+                    uniqueData.append(dict)
+                    duplicateIds.insert(id)
+                }
+            }
+        }
+        
+        self.results = uniqueData
+        self.tableView.reloadData()
+    }
+
+
+
+
 
 
     
@@ -94,6 +118,13 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Configure the cell with the data from the query result
         let result = results[indexPath.row]
+        
+        // Parse date from timestamp
+        let date = (result["Date"] as? Timestamp)!.dateValue()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d',' yyyy - h:mm a"
+        
+        cell.tourDateField.text = dateFormatter.string(from: date)
         cell.firstNameLabel.text = result["First Name"] as? String ?? ""
         cell.lastNameLabel.text = result["Last Name"] as? String ?? ""
         cell.reportedTipLabel.text = result["Reported Tip"] as? String ?? ""
@@ -101,9 +132,9 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.tourTypeLabel.text = result["Tour Type"] as? String ?? ""
         cell.easinessLabel.text = result["Easiness"] as? String ?? ""
         cell.nicenessLabel.text = result["Niceness"] as? String ?? ""
-        cell.demandingLabel.text = result["Demanding"] as? String ?? ""
-        cell.linstenedLabel.text = result["Listened"] as? String ?? ""
-        cell.unorthodoxLabel.text = result["Unorthodox"] as? String ?? ""
+        cell.demandingLabel.text = result["Demandingness"] as? String ?? ""
+        cell.linstenedLabel.text = result["Follow Directions"] as? String ?? ""
+        cell.unorthodoxLabel.text = result["Weird Requests"] as? String ?? ""
         cell.mainFocusLabel.text = result["Main Focus"] as? String ?? ""
         cell.interestsLabel.text = result["Interests"] as? String ?? ""
         cell.nonInterestsLabel.text = result["Non-Interests"] as? String ?? ""

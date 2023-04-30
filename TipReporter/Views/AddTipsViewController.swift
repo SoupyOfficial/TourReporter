@@ -47,7 +47,7 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
 
     @IBAction func addFamillyButtonPress(_ sender: Any) {
         // validate required fields
-        var requiredFields: [UITextField] = [firstNameField, lastNameField, reportedTipField, actualTipField]
+        let requiredFields: [UITextField] = [firstNameField, lastNameField, reportedTipField, actualTipField]
         var emptyFields: [UITextField] = []
         
         for field in requiredFields {
@@ -69,7 +69,8 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
             resultsMessage.text = "Please fill in all required fields"
             print("Please fill in all required fields")
         } else {
-            let data: [String: Any] = ["First Name": firstNameField.text!,
+            let data: [String: Any] = ["documentID": UUID().uuidString,
+                                       "First Name": firstNameField.text!,
                                        "Last Name": lastNameField.text!,
                                        "Reported Tip": reportedTipField.text!,
                                        "Actual Tip": actualTipField.text!,
@@ -86,7 +87,7 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
                                        "Tour Notes": tourNotesField.text ?? ""]
             
             // Add a new document with data
-            db.collection("Test").addDocument(data: data) { [self] err in
+            db.collection("Ashley").addDocument(data: data) { [self] err in
                 if let err = err {
                     resultsMessage.isHidden = false
                     resultsMessage.textColor = .red
@@ -98,7 +99,7 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
                     resultsMessage.text = "Family added"
                     print("Document added successfully")
                     
-                    // reset fields
+                    // reset fields if successfully added
                     defaultFields()
                 }
             }
@@ -167,6 +168,7 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
         tourNotesField.delegate = self
         
         tapGesture.addTarget(self, action: #selector(viewTapped))
+        tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
         
             
