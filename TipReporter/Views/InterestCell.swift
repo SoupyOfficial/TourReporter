@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InterestTableViewCell: UITableViewCell {
+class InterestCell: UITableViewCell {
 
     @IBOutlet weak var interestTitle: UILabel!
     

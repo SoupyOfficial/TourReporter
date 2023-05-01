@@ -9,12 +9,13 @@ import UIKit
 import FirebaseFirestore
 
 
-class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class FamilyListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     
-    let db = Firestore.firestore()
     var results = [[String: Any]]()
     var searchResults = [[String: Any]]()
+    let firebase = Firebase()
+
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -31,70 +32,11 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData(searchText: "")
-    }
-    
-    func loadData(searchText: String) {
-        self.results.removeAll()
-        let firstQuery = db.collection("Ashley")
-            .whereField("First Name", isGreaterThanOrEqualTo: searchText)
-            .whereField("First Name", isLessThanOrEqualTo: searchText + "\u{f8ff}")
-            .order(by: "First Name")
-            .order(by: "Last Name")
-        let lastQuery = db.collection("Ashley")
-            .whereField("Last Name", isGreaterThanOrEqualTo: searchText)
-            .whereField("Last Name", isLessThanOrEqualTo: searchText + "\u{f8ff}")
-            .order(by: "Last Name")
-            .order(by: "First Name")
-        firstQuery.getDocuments { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    self.results.append(document.data())
-                }
-                self.tableView.reloadData()
-                self.removeDuplicates()
-            }
-        }
-        lastQuery.getDocuments { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    self.results.append(document.data())
-                }
-                self.tableView.reloadData()
-                //print("\n\nRESULTS PRE-REMOVAL\n\n", self.results)
-                self.removeDuplicates()
-                //print("\n\nRESULTS POST-REMOVAL\n\n", self.results)
-
-            }
+        firebase.loadData(searchText: "") { results in
+            self.results = results
+            self.tableView.reloadData()
         }
     }
-
-    func removeDuplicates() {
-        var uniqueData = [[String: Any]]()
-        var duplicateIds = Set<String>()
-        
-        for dict in self.results {
-            if let id = dict["documentID"] as? String {
-                if !duplicateIds.contains(id) {
-                    uniqueData.append(dict)
-                    duplicateIds.insert(id)
-                }
-            }
-        }
-        
-        self.results = uniqueData
-        self.tableView.reloadData()
-    }
-
-
-
-
-
-
     
 
     /*
@@ -114,7 +56,7 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue a reusable cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ViewTipsCell", for: indexPath) as! ViewTipsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FamilyCell", for: indexPath) as! FamilyCell
         
         // Configure the cell with the data from the query result
         let result = results[indexPath.row]
@@ -152,7 +94,10 @@ class ViewTipsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        loadData(searchText: searchText)
+        firebase.loadData(searchText: searchText) { results in
+            self.results = results
+            self.tableView.reloadData()
+        }
     }
 
 }

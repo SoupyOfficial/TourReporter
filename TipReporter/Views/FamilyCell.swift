@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewTipsTableViewCell: UITableViewCell {
+class FamilyCell: UITableViewCell {
     
     @IBOutlet weak var tourDateField: UILabel!
     @IBOutlet weak var firstNameLabel: UILabel!

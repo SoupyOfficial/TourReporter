@@ -73,7 +73,7 @@ class InterestsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "interestCell", for: indexPath) as! InterestTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "interestCell", for: indexPath) as! InterestCell
 
         cell.interestTitle.text = interests[indexPath.row]
 

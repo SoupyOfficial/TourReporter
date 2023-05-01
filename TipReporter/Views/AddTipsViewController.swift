@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseFirestore
 
 
 class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate {
@@ -39,12 +38,17 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
     var allSegments: [UISegmentedControl] = []
     var originalViewFrame: CGRect?
     var activeTextField: UITextField?
-
     
+    var types = ["Private", "Non-Private", "Educational", "Complementary", "RIP"]
+    var selectedTypeIndex = 0 // default to first type
     
-    var families: [[String: Any]] = []
-    let db = Firestore.firestore()
+    var interestFileContents = try? String(contentsOfFile: "TipReporter/Interests.txt", encoding: .utf8)
 
+    var interests: [String] = []
+
+    var selectedInterests = [String]()
+    var selectedNoninterests = [String]()
+    
     @IBAction func addFamillyButtonPress(_ sender: Any) {
         // validate required fields
         let requiredFields: [UITextField] = [firstNameField, lastNameField, reportedTipField, actualTipField]
@@ -61,9 +65,7 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
         }
 
         if emptyFields.count > 0 {
-            // at least one field is empty, display an error message
-            // you can display a message above the empty fields
-            // or create a UIAlertController to show an alert
+            // at least one field is empty, display error message
             resultsMessage.isHidden = false
             resultsMessage.textColor = .red
             resultsMessage.text = "Please fill in all required fields"
@@ -86,13 +88,14 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
                                        "Non-Interests": selectedNoninterests,
                                        "Tour Notes": tourNotesField.text ?? ""]
             
-            // Add a new document with data
-            db.collection("Ashley").addDocument(data: data) { [self] err in
-                if let err = err {
+            
+            let firebase = Firebase()
+            firebase.addFamily(data: data) { [self] error in
+                if let error = error {
                     resultsMessage.isHidden = false
                     resultsMessage.textColor = .red
                     resultsMessage.text = "Error adding family"
-                    print("Error adding document: \(err)")
+                    print("Error adding document: \(error)")
                 } else {
                     resultsMessage.isHidden = false
                     resultsMessage.textColor = .green
@@ -142,16 +145,6 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
            interestsTableViewController.selectedRows = selectedNoninterests.compactMap { interests.firstIndex(of: $0) } // Set the selected rows based on the initial selection
            present(interestsTableViewController, animated: true, completion: nil)
     }
-    
-    var types = ["Private", "Non-Private", "Educational", "Complementary", "RIP"]
-    var selectedTypeIndex = 0 // default to first type
-    
-    var interestFileContents = try? String(contentsOfFile: "TipReporter/Interests.txt", encoding: .utf8)
-
-    var interests: [String] = []
-
-    var selectedInterests = [String]()
-    var selectedNoninterests = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
