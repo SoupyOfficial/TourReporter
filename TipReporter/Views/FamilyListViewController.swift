@@ -38,16 +38,16 @@ class FamilyListViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "FamilyDetails" {
+            if let navigationController = segue.destination as? UINavigationController,
+               let detailsViewController = navigationController.viewControllers.first as? FamilyDetailsViewController,
+               let indexPath = tableView.indexPathForSelectedRow {
+                let selectedData = results[indexPath.row]
+                detailsViewController.data = selectedData
+            }
+        }
     }
-    */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the table view
@@ -98,6 +98,11 @@ class FamilyListViewController: UIViewController, UITableViewDataSource, UITable
             self.results = results
             self.tableView.reloadData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = results[indexPath.row]
+        performSegue(withIdentifier: "FamilyDetails", sender: data)
     }
 
 }

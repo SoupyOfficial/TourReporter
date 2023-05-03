@@ -7,8 +7,10 @@
 
 import UIKit
 
-class TourSummaryDetailsViewCell: UITableViewCell {
+class FamilyDetailsCell: UITableViewCell {
 
+    @IBOutlet weak var title: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
