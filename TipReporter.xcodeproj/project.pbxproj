@@ -22,6 +22,7 @@
 		EB6DCE5B29F886880098AA11 /* Interests.txt in Resources */ = {isa = PBXBuildFile; fileRef = EB6DCE5A29F886880098AA11 /* Interests.txt */; };
 		EB6DCE5D29F8A06E0098AA11 /* InterestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5C29F8A06E0098AA11 /* InterestsTableViewController.swift */; };
 		EB6DCE5F29F8A19A0098AA11 /* InterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DCE5E29F8A19A0098AA11 /* InterestCell.swift */; };
+		EB71BC7D2A12AA48005520A8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71BC7C2A12AA48005520A8 /* SignInViewController.swift */; };
 		EBE78B632A01EC6C007ED3EB /* RoundedBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE78B622A01EC6C007ED3EB /* RoundedBackgroundView.swift */; };
 		EBE78B652A01F06D007ED3EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBE78B642A01F06D007ED3EB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		EB6DCE5A29F886880098AA11 /* Interests.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = Interests.txt; path = TipReporter/Interests.txt; sourceTree = SOURCE_ROOT; };
 		EB6DCE5C29F8A06E0098AA11 /* InterestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsTableViewController.swift; sourceTree = "<group>"; };
 		EB6DCE5E29F8A19A0098AA11 /* InterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCell.swift; sourceTree = "<group>"; };
+		EB71BC7C2A12AA48005520A8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		EBE78B622A01EC6C007ED3EB /* RoundedBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBackgroundView.swift; sourceTree = "<group>"; };
 		EBE78B642A01F06D007ED3EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FFA1670B938292A0CEBD65E2 /* Pods-TipReporter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipReporter.release.xcconfig"; path = "Target Support Files/Pods-TipReporter/Pods-TipReporter.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				EB6DCE5E29F8A19A0098AA11 /* InterestCell.swift */,
 				EB1DEF7429FE004900FB5E43 /* FamilyDetailsCell.swift */,
 				EB1DEF7629FE015400FB5E43 /* FamilyDetailsViewController.swift */,
+				EB71BC7C2A12AA48005520A8 /* SignInViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				EB1DEF7529FE004900FB5E43 /* FamilyDetailsCell.swift in Sources */,
 				EB6DCE5D29F8A06E0098AA11 /* InterestsTableViewController.swift in Sources */,
 				EB6DCE5829F1977F0098AA11 /* FamilyCell.swift in Sources */,
+				EB71BC7D2A12AA48005520A8 /* SignInViewController.swift in Sources */,
 				EBE78B632A01EC6C007ED3EB /* RoundedBackgroundView.swift in Sources */,
 				EB6DCE3229F0BB100098AA11 /* AppDelegate.swift in Sources */,
 				EB6DCE3429F0BB100098AA11 /* SceneDelegate.swift in Sources */,
@@ -415,18 +419,19 @@
 				DEVELOPMENT_TEAM = DGQ5P34GS9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TipReporter/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Tip Tracker";
+				INFOPLIST_KEY_CFBundleDisplayName = "VIP Tracker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.33;
 				PRODUCT_BUNDLE_IDENTIFIER = MobileApp.TipReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -446,18 +451,19 @@
 				DEVELOPMENT_TEAM = DGQ5P34GS9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TipReporter/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Tip Tracker";
+				INFOPLIST_KEY_CFBundleDisplayName = "VIP Tracker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.33;
 				PRODUCT_BUNDLE_IDENTIFIER = MobileApp.TipReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

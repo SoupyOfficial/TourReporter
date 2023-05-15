@@ -6,14 +6,25 @@
 //
 
 import Foundation
-import FirebaseFirestore
+import Firebase
 
 class Firebase {
+    static let shared = Firebase()
     let db = Firestore.firestore()
+    let users = Firestore.firestore().collection("Users")
+    var collection = "Test"
+    let clientID = FirebaseApp.app()?.options.clientID
+    
+    func updateCollection(_ input: String, completion: @escaping (Bool) -> Void) {
+        //print("Updating collection with input: \(input)")
+
+        collection = input
+        completion(true)
+    }
     
     func addFamily(data: [String: Any], completion: @escaping (_ error: Error?) -> Void) {
         // Add a new document with data
-        db.collection(ProcessInfo.processInfo.environment["USER_COLLECTION"]!).addDocument(data: data) { err in
+        db.collection(Firebase.shared.collection).addDocument(data: data) { err in
             if let err = err {
                 completion(err)
             } else {
@@ -24,12 +35,12 @@ class Firebase {
     
     func loadData(searchText: String, completion: @escaping ([[String: Any]]) -> Void) {
         var results = [[String: Any]]()
-        let firstQuery = db.collection(ProcessInfo.processInfo.environment["USER_COLLECTION"]!)
+        let firstQuery = db.collection(Firebase.shared.collection)
             .whereField("First Name", isGreaterThanOrEqualTo: searchText)
             .whereField("First Name", isLessThanOrEqualTo: searchText + "\u{f8ff}")
             .order(by: "First Name")
             .order(by: "Last Name")
-        let lastQuery = db.collection(ProcessInfo.processInfo.environment["USER_COLLECTION"]!)
+        let lastQuery = db.collection(Firebase.shared.collection)
             .whereField("Last Name", isGreaterThanOrEqualTo: searchText)
             .whereField("Last Name", isLessThanOrEqualTo: searchText + "\u{f8ff}")
             .order(by: "Last Name")

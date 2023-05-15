@@ -153,6 +153,7 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         
+        
         // Set the delegate of each text field to self
         firstNameField.delegate = self
         lastNameField.delegate = self

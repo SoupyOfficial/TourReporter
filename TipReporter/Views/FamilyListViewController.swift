@@ -15,6 +15,7 @@ class FamilyListViewController: UIViewController, UITableViewDataSource, UITable
     var results = [[String: Any]]()
     var searchResults = [[String: Any]]()
     let firebase = Firebase()
+    let activityIndicator = UIActivityIndicatorView(style: .large)
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,13 +29,22 @@ class FamilyListViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         
         searchBar.delegate = self
+        
+        activityIndicator.color = .gray
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if results.isEmpty {
+            activityIndicator.startAnimating()
+        }
         firebase.loadData(searchText: "") { results in
             self.results = results
             self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -67,26 +77,20 @@ class FamilyListViewController: UIViewController, UITableViewDataSource, UITable
         dateFormatter.dateFormat = "MMM d',' yyyy - h:mm a"
         
         cell.tourDateField.text = dateFormatter.string(from: date)
-        cell.firstNameLabel.text = result["First Name"] as? String ?? ""
-        cell.lastNameLabel.text = result["Last Name"] as? String ?? ""
-        cell.reportedTipLabel.text = result["Reported Tip"] as? String ?? ""
-        cell.actualTipLabel.text = result["Actual Tip"] as? String ?? ""
-        cell.tourTypeLabel.text = result["Tour Type"] as? String ?? ""
-        cell.easinessLabel.text = result["Easiness"] as? String ?? ""
-        cell.nicenessLabel.text = result["Niceness"] as? String ?? ""
-        cell.demandingLabel.text = result["Demandingness"] as? String ?? ""
-        cell.linstenedLabel.text = result["Follow Directions"] as? String ?? ""
-        cell.unorthodoxLabel.text = result["Weird Requests"] as? String ?? ""
-        cell.mainFocusLabel.text = result["Main Focus"] as? String ?? ""
-        cell.interestsLabel.text = result["Interests"] as? String ?? ""
-        cell.nonInterestsLabel.text = result["Non-Interests"] as? String ?? ""
-        cell.tourNotesLabel.text = result["Tour Notes"] as? String ?? ""
+        //let paragraphStyle = NSMutableParagraphStyle()
+        //paragraphStyle.headIndent = 20
+        cell.firstNameLabel.text = result["First Name"] as? String
+//        cell.firstNameLabel.attributedText = NSMutableAttributedString(string: cell.firstNameLabel.text!, attributes: [
+//            .paragraphStyle: paragraphStyle
+//        ])
+        cell.lastNameLabel.text = result["Last Name"] as? String
+        cell.easinessLabel.text = result["Easiness"] as? String
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 715
+        return 102
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

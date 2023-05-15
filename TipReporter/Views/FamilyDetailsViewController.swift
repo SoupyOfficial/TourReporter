@@ -20,12 +20,14 @@ class FamilyDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var ratingsViewLeft: UIView!
     @IBOutlet weak var ratingsViewRight: UIView!
+    @IBOutlet weak var ratingsView: UIView!
     
     var selectedSegmentIndex = 0
     @IBOutlet weak var interestsSegment: UISegmentedControl!
     
     var data: [String: Any] = [:]
     var interests: [String] = []
+    var popupView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +45,21 @@ class FamilyDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
+        
+        // Temp show ratings button
+        //let showRatingsButton = UIBarButtonItem(title: "Show Ratings", style: .plain, target: self, action: #selector(showRatingsButtonTapped))
+        //navigationItem.rightBarButtonItem = showRatingsButton
                 
 
+        // Ratings Modal
+        let ratingsTapGesture = UITapGestureRecognizer(target: self, action: #selector(RatingsViewTapped))
+        ratingsTapGesture.numberOfTapsRequired = 1
+        ratingsTapGesture.numberOfTouchesRequired = 1
+
+        ratingsView.addGestureRecognizer(ratingsTapGesture)
+
+        
+        
 
     }
     
@@ -79,6 +94,148 @@ class FamilyDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     @objc private func backButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc func RatingsViewTapped() {
+        // Create a new UIView for the popup box
+        let viewSize = view.bounds.size
+        let popupSize = 300
+        let popupRadius = popupSize / 2
+        popupView = UIView(frame: CGRect(x: (Int(viewSize.width) / 2) - popupRadius, y: (Int(viewSize.height) / 2) - popupRadius, width: popupSize, height: popupSize))
+        popupView.backgroundColor = UIColor.systemBackground
+        popupView.layer.cornerRadius = 10
+        popupView.layer.borderWidth = 1
+        popupView.layer.borderColor = UIColor.black.cgColor
+
+        // Add container view to hold labels
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        popupView.addSubview(containerView)
+
+        NSLayoutConstraint.activate([
+            containerView.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: popupView.centerYAnchor),
+            containerView.widthAnchor.constraint(equalToConstant: 260),
+            containerView.heightAnchor.constraint(equalToConstant: 170)
+        ])
+
+        // Add category labels to the container view
+        let categories = ["Easiness", "Niceness", "Demandingness", "Follow Directions", "Weird Requests", "Main Focus"]
+        for (index, category) in categories.enumerated() {
+            let categoryLabel = UILabel()
+            categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+            categoryLabel.text = category
+            categoryLabel.textAlignment = .left
+            containerView.addSubview(categoryLabel)
+
+            let dataLabel = UILabel()
+            dataLabel.translatesAutoresizingMaskIntoConstraints = false
+            dataLabel.text = data[category] as? String ?? ""
+            dataLabel.textAlignment = .left
+            containerView.addSubview(dataLabel)
+
+            NSLayoutConstraint.activate([
+                categoryLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: CGFloat(index * 30)),
+                categoryLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                categoryLabel.widthAnchor.constraint(equalToConstant: 140),
+                categoryLabel.heightAnchor.constraint(equalToConstant: 20),
+
+                dataLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: CGFloat(index * 30)),
+                dataLabel.leadingAnchor.constraint(equalTo: categoryLabel.trailingAnchor, constant: 10),
+                dataLabel.widthAnchor.constraint(equalToConstant: 70),
+                dataLabel.heightAnchor.constraint(equalToConstant: 20),
+            ])
+        }
+
+        // Add a close button to the popup box
+        let closeButton = UIButton(type: .system)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.setTitle("Close", for: .normal)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        popupView.tag = 1
+
+        popupView.addSubview(closeButton)
+
+        NSLayoutConstraint.activate([
+            closeButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -10),
+            closeButton.topAnchor.constraint(equalTo: popupView.topAnchor, constant: 10),
+            closeButton.widthAnchor.constraint(equalToConstant: 40),
+            closeButton.heightAnchor.constraint(equalToConstant: 20)
+        ])
+
+        // Add the popup box to the view hierarchy
+        view.addSubview(popupView)
+
+        // Animate the popup box
+        popupView.alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            self.popupView.alpha = 1
+        }
+    }
+
+
+
+
+    
+    @objc private func showRatingsButtonTapped() {
+        // Create a new UIView for the popup box
+        let viewSize = view.bounds.size
+        let popupSize = 200
+        let popupRadius = popupSize / 2
+        popupView = UIView(frame: CGRect(x: (Int(viewSize.width) / 2) - popupRadius, y: (Int(viewSize.height) / 2) - popupRadius, width: popupSize, height: popupSize))
+        popupView.backgroundColor = UIColor.systemBackground
+        popupView.layer.cornerRadius = 10
+        popupView.layer.borderWidth = 1
+        popupView.layer.borderColor = UIColor.black.cgColor
+
+        // Add a label to the popup box
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Hello, world!"
+        label.textAlignment = .center
+        popupView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: popupView.centerYAnchor),
+            label.widthAnchor.constraint(equalToConstant: 160),
+            label.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        // Add a close button to the popup box
+            let closeButton = UIButton(type: .system)
+            closeButton.translatesAutoresizingMaskIntoConstraints = false
+            closeButton.setTitle("Close", for: .normal)
+            closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+            popupView.tag = 1
+
+            popupView.addSubview(closeButton)
+            
+            NSLayoutConstraint.activate([
+                closeButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -10),
+                closeButton.topAnchor.constraint(equalTo: popupView.topAnchor, constant: 10),
+                closeButton.widthAnchor.constraint(equalToConstant: 40),
+                closeButton.heightAnchor.constraint(equalToConstant: 20)
+            ])
+
+        // Add the popup box to the view hierarchy
+        view.addSubview(popupView)
+
+
+        // Animate the popup box
+        popupView.alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            self.popupView.alpha = 1
+        }
+    }
+    
+    @objc func closeButtonTapped() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.popupView.alpha = 0
+        }) { _ in
+            self.popupView.removeFromSuperview()
+        }
+    }
+
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
