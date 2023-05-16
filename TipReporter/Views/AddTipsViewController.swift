@@ -9,6 +9,7 @@ import UIKit
 
 
 class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate {
+    static let shared = AddTipsViewController()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var tapGesture: UITapGestureRecognizer!
@@ -49,6 +50,14 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
     var selectedInterests = [String]()
     var selectedNoninterests = [String]()
     
+    var user = "Test"
+    
+    func updateUser(_ input: String, completion: @escaping (Bool) -> Void) {
+        //print("Updating collection with input: \(input)")
+        user = input
+        completion(true)
+    }
+    
     @IBAction func addFamillyButtonPress(_ sender: Any) {
         // validate required fields
         let requiredFields: [UITextField] = [firstNameField, lastNameField, reportedTipField, actualTipField]
@@ -71,22 +80,24 @@ class AddTipsViewController: UIViewController, UIScrollViewDelegate, InterestsTa
             resultsMessage.text = "Please fill in all required fields"
             print("Please fill in all required fields")
         } else {
-            let data: [String: Any] = ["documentID": UUID().uuidString,
-                                       "First Name": firstNameField.text!,
-                                       "Last Name": lastNameField.text!,
-                                       "Reported Tip": reportedTipField.text!,
-                                       "Actual Tip": actualTipField.text!,
-                                       "Date": tourDateTime.date,
-                                       "Tour Type": types[selectedTypeIndex],
-                                       "Easiness": easinessSegment.titleForSegment(at: easinessSegment.selectedSegmentIndex)!,
-                                       "Niceness": nicenessSegment.titleForSegment(at: nicenessSegment.selectedSegmentIndex)!,
-                                       "Demandingness": demandingSegment.titleForSegment(at: demandingSegment.selectedSegmentIndex)!,
-                                       "Follow Directions": followDirectionsSegment.titleForSegment(at: followDirectionsSegment.selectedSegmentIndex)!,
-                                       "Weird Requests": weirdRequestsSegment.titleForSegment(at: weirdRequestsSegment.selectedSegmentIndex)!,
-                                       "Main Focus": tourFocusSegment.titleForSegment(at: tourFocusSegment.selectedSegmentIndex)!,
-                                       "Interests": selectedInterests,
-                                       "Non-Interests": selectedNoninterests,
-                                       "Tour Notes": tourNotesField.text ?? ""]
+            let data: [String: Any] = [
+                "tourGuide": AddTipsViewController.shared.user,
+                "documentID": UUID().uuidString,
+                "First Name": firstNameField.text!,
+                "Last Name": lastNameField.text!,
+                "Reported Tip": reportedTipField.text!,
+                "Actual Tip": actualTipField.text!,
+                "Date": tourDateTime.date,
+                "Tour Type": types[selectedTypeIndex],
+                "Easiness": easinessSegment.titleForSegment(at: easinessSegment.selectedSegmentIndex)!,
+                "Niceness": nicenessSegment.titleForSegment(at: nicenessSegment.selectedSegmentIndex)!,
+                "Demandingness": demandingSegment.titleForSegment(at: demandingSegment.selectedSegmentIndex)!,
+                "Follow Directions": followDirectionsSegment.titleForSegment(at: followDirectionsSegment.selectedSegmentIndex)!,
+                "Weird Requests": weirdRequestsSegment.titleForSegment(at: weirdRequestsSegment.selectedSegmentIndex)!,
+                "Main Focus": tourFocusSegment.titleForSegment(at: tourFocusSegment.selectedSegmentIndex)!,
+                "Interests": selectedInterests,
+                "Non-Interests": selectedNoninterests,
+                "Tour Notes": tourNotesField.text ?? ""]
             
             
             let firebase = Firebase()
