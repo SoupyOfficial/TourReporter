@@ -1,0 +1,6 @@
+framework module Pods_TipReporter {
+  umbrella header "Pods-TipReporter-umbrella.h"
+
+  export *
+  module * { export * }
+}
