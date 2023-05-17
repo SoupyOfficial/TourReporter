@@ -73,18 +73,18 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
 
         // Create Google Sign In
-//        let googleSignIn = GIDSignInButton()
-//        googleSignIn.colorScheme = GIDSignInButtonColorScheme.dark
-//        googleSignIn.style = GIDSignInButtonStyle.iconOnly
-//        googleSignIn.sizeToFit()
-//        googleSignIn.center = view.center
-//        googleSignIn.addTarget(self, action: #selector(googleSignInFunction), for: .touchUpInside)
-//
-//        view.addSubview(googleSignIn)
-//        NSLayoutConstraint.activate([
-//            googleSignIn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            googleSignIn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//        ])
+        let googleSignIn = GIDSignInButton()
+        googleSignIn.colorScheme = GIDSignInButtonColorScheme.dark
+        googleSignIn.style = GIDSignInButtonStyle.iconOnly
+        googleSignIn.sizeToFit()
+        googleSignIn.center = view.center
+        googleSignIn.addTarget(self, action: #selector(googleSignInFunction), for: .touchUpInside)
+
+        view.addSubview(googleSignIn)
+        NSLayoutConstraint.activate([
+            googleSignIn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            googleSignIn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
         // Do any additional setup after loading the view.
     }
     
