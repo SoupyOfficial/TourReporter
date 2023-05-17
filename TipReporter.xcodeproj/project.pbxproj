@@ -433,7 +433,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.36;
+				MARKETING_VERSION = 0.38;
 				PRODUCT_BUNDLE_IDENTIFIER = MobileApp.TipReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -467,7 +467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.36;
+				MARKETING_VERSION = 0.38;
 				PRODUCT_BUNDLE_IDENTIFIER = MobileApp.TipReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
