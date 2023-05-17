@@ -12,6 +12,7 @@ import GoogleSignIn
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var nameInput: UITextField!
+    @IBOutlet weak var enterButton: UIButton!
     
     @IBAction func enterButtonPressed(_ sender: Any) {
         Firebase.shared.updateUser(nameInput.text!) { success in
@@ -83,7 +84,7 @@ class SignInViewController: UIViewController {
         view.addSubview(googleSignIn)
         NSLayoutConstraint.activate([
             googleSignIn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            googleSignIn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            googleSignIn.topAnchor.constraint(equalTo: enterButton.bottomAnchor, constant: 0),
         ])
         // Do any additional setup after loading the view.
     }
