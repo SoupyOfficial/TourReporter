@@ -36,7 +36,7 @@ class Firebase {
     
     func loadData(searchText: String, completion: @escaping ([[String: Any]]) -> Void) {
         var results = [[String: Any]]()
-        print(Firebase.shared.user)
+        //print(Firebase.shared.user)
         let firstQuery = db.collection("Tour Info")
             .whereField("tourGuide", isEqualTo: Firebase.shared.user)
             .whereField("First Name", isGreaterThanOrEqualTo: searchText)
@@ -64,7 +64,7 @@ class Firebase {
                             results.append(document.data())
                         }
                         let uniqueData = self.removeDuplicates(from: results)
-                        print(uniqueData)
+                        //print(uniqueData)
                         completion(uniqueData)
                     }
                 }
