@@ -915,6 +915,7 @@
                                         </connections>
                                     </view>
                                 </subviews>
+                                <keyboardLayoutGuide key="keyboard" id="hUc-pi-gO2"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Slk-Iz-qmi" firstAttribute="top" secondItem="NUp-Ug-j0f" secondAttribute="top" id="2Ra-tW-Xt6"/>

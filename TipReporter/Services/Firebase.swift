@@ -17,13 +17,15 @@ class Firebase {
     
     func updateUser(_ input: String, completion: @escaping (Bool) -> Void) {
         //print("Updating collection with input: \(input)")
-        user = input
+        if(input != "") {
+            user = input
+        }
         completion(true)
     }
     
     func addFamily(data: [String: Any], completion: @escaping (_ error: Error?) -> Void) {
         // Add a new document with data
-        db.collection(Firebase.shared.user).addDocument(data: data) { err in
+        db.collection("Tour Info").addDocument(data: data) { err in
             if let err = err {
                 completion(err)
             } else {
@@ -34,12 +36,15 @@ class Firebase {
     
     func loadData(searchText: String, completion: @escaping ([[String: Any]]) -> Void) {
         var results = [[String: Any]]()
-        let firstQuery = db.collection(Firebase.shared.user)
+        print(Firebase.shared.user)
+        let firstQuery = db.collection("Tour Info")
+            .whereField("tourGuide", isEqualTo: Firebase.shared.user)
             .whereField("First Name", isGreaterThanOrEqualTo: searchText)
             .whereField("First Name", isLessThanOrEqualTo: searchText + "\u{f8ff}")
             .order(by: "First Name")
             .order(by: "Last Name")
-        let lastQuery = db.collection(Firebase.shared.user)
+        let lastQuery = db.collection("Tour Info")
+            .whereField("tourGuide", isEqualTo: Firebase.shared.user)
             .whereField("Last Name", isGreaterThanOrEqualTo: searchText)
             .whereField("Last Name", isLessThanOrEqualTo: searchText + "\u{f8ff}")
             .order(by: "Last Name")
@@ -59,6 +64,7 @@ class Firebase {
                             results.append(document.data())
                         }
                         let uniqueData = self.removeDuplicates(from: results)
+                        print(uniqueData)
                         completion(uniqueData)
                     }
                 }
